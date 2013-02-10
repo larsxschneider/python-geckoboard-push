@@ -40,5 +40,8 @@ class Gecko(object):
         import datetime
         dt = (datetime.datetime.utcnow if utc else datetime.datetime.now)().strftime(format)
         return self.text(widget_key, dt)
+
+    def beater(self, *args, **kwargs):
+        return lambda: self.heartbeat(*args, **kwargs)
         
 
