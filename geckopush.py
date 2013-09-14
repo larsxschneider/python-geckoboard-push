@@ -3,18 +3,18 @@ import requests, json
 class Gecko(object):
     def __init__(self, api_key):
         self.api_key = api_key
-        
+
     def push(self, widget_key, data):
-        ret = requests.post("https://push.geckoboard.com/v1/send/%s" % widget_key, json.dumps({'api_key' : self.api_key, 'data' : data}))
+        ret = requests.post("https://push.geckoboard.com/v1/send/%s" % widget_key, json.dumps({'api_key' : self.api_key, 'data' : data}), verify=False)
         if not (ret.status_code == 200 and ret.json().get('success') == True):
             raise ValueError(ret.content)
-        
+
     def number(self, widget_key, number1, number2=None):
         data = {'item' : []}
         if number1: data['item'].append({'value' : number1, 'text' : ''})
         if number2: data['item'].append({'value' : number2, 'text' : ''})
         return self.push(widget_key, data)
-    
+
     def rag(self, widget_key, *items):
         data = {'item' : []}
         for item in items:
@@ -26,7 +26,7 @@ class Gecko(object):
         for item in values:
             data['item'].append(item)
         return self.push(widget_key, data)
-        
+
     def text(self, widget_key, *texts):
         data = { "item" : [] }
         for text in texts:
@@ -43,5 +43,5 @@ class Gecko(object):
 
     def beater(self, *args, **kwargs):
         return lambda: self.heartbeat(*args, **kwargs)
-        
+
 
