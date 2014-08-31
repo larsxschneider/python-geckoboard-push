@@ -80,8 +80,8 @@ class NumberWidget(Widget):
         super(NumberWidget, self).__init__(widget_key)
 
     def add_stat(self, number1, number2 = None, text = None):
-        if number1: self._items.append({'text': text, 'value': number1})
-        if number2: self._items.append({'text': text, 'value': number2})
+        if number1 is not None: self._items.append({'text': text, 'value': number1})
+        if number2 is not None: self._items.append({'text': text, 'value': number2})
 
     def spark_line(self, values = []):
         self._items.append(values)
