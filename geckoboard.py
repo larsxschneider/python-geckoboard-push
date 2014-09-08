@@ -167,3 +167,17 @@ class Text(Widget):
         return {
             'item': self._items
         }
+
+
+class Map(Widget):
+    # https://developer.geckoboard.com/#map
+
+    def add_coordinates(self, latitude, longitude, size=None):
+        self._items.append({'latitude': latitude, 'longitude': longitude, 'size' : size})
+
+    def data(self):
+        return {
+            'points': {
+                'point': self._items
+            }
+        }
